@@ -1,6 +1,7 @@
 package lilygo
 
 import (
+	"fmt"
 	"io"
 	"strings"
 
@@ -61,6 +62,14 @@ func ConvertToLily(s string, convertAlphanumeric bool) (string, error) {
 	}
 
 	return result, nil
+}
+
+func ConvertToLilyWithOriginal(s string, convertAlphanumeric bool) (string, error) {
+	result, err := ConvertToLily(s, convertAlphanumeric)
+	if err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%s\n《%s》", result, s), nil
 }
 
 // ConvertFromLily 受け取ったリリイ文字のstringをUTF-8に変換し、その結果を返します。
